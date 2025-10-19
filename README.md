@@ -1,10 +1,10 @@
-# Package name
+# Comed Prices
 Package Name
 <pre>
-  pip install independent-machine
+  pip install comed-prices
 </pre>
 Then:
 ```Python
   # Python
-  import independent_machine
+  import comed_prices
 ```
