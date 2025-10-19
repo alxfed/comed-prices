@@ -1,4 +1,4 @@
-# Comed Prices
+# ComEd® Prices
 Package Name
 <pre>
   pip install comed-prices

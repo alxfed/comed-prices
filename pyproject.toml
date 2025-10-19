@@ -3,11 +3,11 @@ requires = ["setuptools>=67.0"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "comed-prices"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
     {name="Alexander Fedotov", email="alex.fedotov@aol.com"},
 ]
-description = "ComEd hourly and 5 minute prices"
+description = "ComEd® hourly and 5 minute prices"
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers=[
