@@ -15,6 +15,10 @@ classifiers=[
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
 ]
+keywords = ["ComEd", "prices", "hourly"]
+dependencies = [
+    "requests >= 2.31.0"
+]
 [project.urls]
 "Homepage" = "https://github.com/alxfed/comed-prices"
 "Bug Tracker" = "https://github.com/alxfed/comed-prices/issues"
