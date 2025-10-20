@@ -34,10 +34,18 @@ def current_hour_average_price(tz='America/Chicago'):
     return price, local_time
 
 
-def five_minute_prices(start=None, end=None, tz='America/Chicago'):
-    '''
-    start: YYYYMMDDhhmm
-    end: YYYYMMDDhhmm 202510192330
+def five_minute_prices(start: str=None, end: str=None, tz='America/Chicago'):
+    ''' Request a list of available five minute prices in a given time range.
+    Generates a list of dictionaries; price is a float, local_time is a Python
+    datetime object.
+
+    start: Local (CST or CDT time, NOT UTC) time of the beginning of the period
+        to request, as string in YYYYMMDDhhmm format. Example: 202510200600
+    end: Local (CST or CDT time, NOT UTC) time of the end of the period
+        to request, as string in YYYYMMDDhhmm format. Example: 202510200630
+    tz: timezone is a name of the timezone (see Python docs for TimeZoneInfo);
+        for example, 'America/Chicago'. this creates automatic daylight saving
+        adjustments during the conversion from UTC to local.
     '''
 
     response = requests.get(
@@ -45,7 +53,8 @@ def five_minute_prices(start=None, end=None, tz='America/Chicago'):
         params={
             'type': '5minutefeed',
             'datestart': start,
-            'dateend': end
+            'dateend': end,
+            'format': 'json'
         }
     )
     if not response.ok:
@@ -67,5 +76,5 @@ def five_minute_prices(start=None, end=None, tz='America/Chicago'):
 
 if __name__ == '__main__':
     print('You have launched __main__')
-    p = five_minute_prices(tz='America/Chicago')
+    # p = five_minute_prices(start='202510200635', end='202510200655', tz='America/Chicago')
     ...
