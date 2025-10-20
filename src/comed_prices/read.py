@@ -7,7 +7,7 @@ LICENSE file in the root directory of this source tree.
 """
 
 import requests
-from utils import millis_to_local_time
+from .utils import millis_to_local_time
 
 BASE_URL = 'https://hourlypricing.comed.com/api'
 
