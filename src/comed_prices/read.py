@@ -7,6 +7,7 @@ LICENSE file in the root directory of this source tree.
 """
 
 import requests
+from datetime import datetime
 from .utils import millis_to_local_time
 
 BASE_URL = 'https://hourlypricing.comed.com/api'
@@ -58,18 +59,23 @@ def five_minute_prices(start: str=None, end: str=None, tz='America/Chicago'):
         }
     )
     if not response.ok:
-        raise Exception('Could not get current list of five minute prices')
+        time = datetime.now()
+        prices = [
+            {'price': 0.0, 'local_time': time},
+            {'price': 0.0, 'local_time': time},
+            {'price': 0.0, 'local_time': time}
+        ]
 
-    # The first item in the useless (here) list.
-    data = response.json()
+    else:
+        data = response.json()
 
-    prices = []
-    for d in data:
-        new_dict = d.copy()  # Shallow copy to avoid modifying original
-        new_dict['price'] = float(new_dict['price'])
-        new_dict['local_time'] = millis_to_local_time(new_dict['millisUTC'], tz)
-        del new_dict['millisUTC']
-        prices.append(new_dict)
+        prices = []
+        for d in data:
+            new_dict = d.copy()  # Shallow copy to avoid modifying original
+            new_dict['price'] = float(new_dict['price'])
+            new_dict['local_time'] = millis_to_local_time(new_dict['millisUTC'], tz)
+            del new_dict['millisUTC']
+            prices.append(new_dict)
 
     return prices
 
