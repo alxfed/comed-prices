@@ -69,13 +69,22 @@ def five_minute_prices(start: str=None, end: str=None, tz='America/Chicago'):
     else:
         data = response.json()
 
-        prices = []
-        for d in data:
-            new_dict = d.copy()  # Shallow copy to avoid modifying original
-            new_dict['price'] = float(new_dict['price'])
-            new_dict['local_time'] = millis_to_local_time(new_dict['millisUTC'], tz)
-            del new_dict['millisUTC']
-            prices.append(new_dict)
+        if len(data) == 0:
+            time = datetime.now()
+            prices = [
+                {'price': 0.0, 'local_time': time},
+                {'price': 0.0, 'local_time': time},
+                {'price': 0.0, 'local_time': time}
+            ]
+
+        else:
+            prices = []
+            for d in data:
+                new_dict = d.copy()  # Shallow copy to avoid modifying original
+                new_dict['price'] = float(new_dict['price'])
+                new_dict['local_time'] = millis_to_local_time(new_dict['millisUTC'], tz)
+                del new_dict['millisUTC']
+                prices.append(new_dict)
 
     return prices
 
